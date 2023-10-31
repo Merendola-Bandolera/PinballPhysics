@@ -35,23 +35,7 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 2;
-	int y = SCREEN_HEIGHT / 1.5f;
-	int diameter = SCREEN_WIDTH / 2;
 
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	b2Body* big_ball = world->CreateBody(&body);
-
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
-
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
 
 	b2BodyDef groundDef;
 	b2Body* groundBody = world->CreateBody(&groundDef);
@@ -388,6 +372,46 @@ bool PhysBody::Contains(int x, int y) const
 
 	return false;
 }
+
+PhysBody* ModulePhysics::CreateSolidChain(int x, int y, int* points, int size) {
+	// Create BODY at position x,y
+	b2BodyDef body;
+	body.type = b2_staticBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	// Add BODY to the world
+	b2Body* b = world->CreateBody(&body);
+
+	// Create SHAPE
+	b2ChainShape shape;
+	b2Vec2* p = new b2Vec2[size / 2];
+	for (uint i = 0; i < size / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
+	}
+	shape.CreateLoop(p, size / 2);
+
+	// Create FIXTURE
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+
+	// Add fixture to the BODY
+	b->CreateFixture(&fixture);
+
+	// Clean-up temp array
+	delete p;
+
+	// Create our custom PhysBody class
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = 0;
+
+	// Return our PhysBody class
+	return pbody;
+}
+
 
 int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& normal_y) const
 {

@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "Box2D/Box2D/Box2D.h"
 
-#define GRAVITY_X 0.0f
+#define GRAVITY_X -4.0f
 #define GRAVITY_Y -7.0f
 
 #define PIXELS_PER_METER 50.0f // if touched change METER_PER_PIXEL too
@@ -46,6 +46,7 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
+	PhysBody* ModulePhysics::CreateSolidChain(int x, int y, int* points, int size);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

@@ -32,6 +32,59 @@ bool ModuleSceneIntro::Start()
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
+	int tableroExterno[96] = {
+	492, 760,
+	531, 760,
+	531, 215,
+	529, 193,
+	523, 166,
+	515, 143,
+	502, 117,
+	485, 94,
+	466, 77,
+	445, 67,
+	421, 61,
+	393, 60,
+	157, 60,
+	139, 63,
+	115, 72,
+	93, 85,
+	59, 60,
+	24, 90,
+	56, 119,
+	43, 133,
+	31, 152,
+	24, 169,
+	21, 186,
+	21, 417,
+	22, 428,
+	26, 443,
+	35, 457,
+	62, 482,
+	38, 506,
+	27, 520,
+	22, 531,
+	20, 549,
+	20, 760,
+	67, 760,
+	67, 720,
+	172, 760,
+	172, 2000,
+	277, 2000,
+	277, 760,
+	381, 720,
+	381, 760,
+	428, 760,
+	428, 506,
+	407, 489,
+	456, 449,
+	456, 296,
+	492, 310,
+	492, 755
+	};
+
+	App->physics->CreateSolidChain(0, 0, tableroExterno, 96);
+
 	return ret;
 }
 
@@ -164,6 +217,7 @@ update_status ModuleSceneIntro::Update()
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
+	
 
 	return UPDATE_CONTINUE;
 }
