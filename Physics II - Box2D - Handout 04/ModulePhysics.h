@@ -58,4 +58,12 @@ private:
 	b2MouseJoint* mouse_joint;
 	b2Body* ground;
 	b2Body* selected_body = nullptr;
+
+	PhysBody* flipperLeft;
+	PhysBody* flipperRight;
+	PhysBody* flipperLeftPoint;
+	PhysBody* flipperRightPoint;
+	int flipperforce;
+	b2RevoluteJoint* joint_rightFlipper;
+	b2RevoluteJoint* joint_leftFlipper;
 };

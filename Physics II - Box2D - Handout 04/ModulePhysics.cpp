@@ -42,7 +42,43 @@ bool ModulePhysics::Start()
 
 	b2EdgeShape groundShape;
 
+	// --- Left flipper ---
+	flipperLeft = App->physics->CreateRectangle(200, 200, 40, 80);
+	flipperLeftPoint = App->physics->CreateCircle(200, 200, 2, 0.0f, false);
+	flipperLeftPoint->body->SetType(b2_staticBody);
 
+	// Flipper Joint (flipper rectangle x flipper circle to give it some movement)
+	b2RevoluteJointDef flipperLeftJoint;
+
+	flipperLeftJoint.bodyA = flipperLeft->body;
+	flipperLeftJoint.bodyB = flipperLeftPoint->body;
+	flipperLeftJoint.referenceAngle = 0 * DEGTORAD;
+	flipperLeftJoint.enableLimit = true;
+	flipperLeftJoint.lowerAngle = -30 * DEGTORAD;
+	flipperLeftJoint.upperAngle = 30 * DEGTORAD;
+	flipperLeftJoint.localAnchorA.Set(PIXEL_TO_METERS(-33), 0);
+	flipperLeftJoint.localAnchorB.Set(0, 0);
+	joint_leftFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint);
+
+	// --- Right flipper ---
+	flipperRight = App->physics->CreateRectangle(400, 200, 40, 80);
+	flipperRightPoint = App->physics->CreateCircle(400, 200, 2, 0.0f, false);
+	flipperRightPoint->body->SetType(b2_staticBody);
+
+	// Flipper Joint
+	b2RevoluteJointDef flipperRightJoint;
+
+	flipperRightJoint.bodyA = flipperRight->body;
+	flipperRightJoint.bodyB = flipperRightPoint->body;
+	flipperRightJoint.referenceAngle = 0 * DEGTORAD;
+	flipperRightJoint.enableLimit = false;
+	flipperRightJoint.lowerAngle = -30 * DEGTORAD;
+	flipperRightJoint.upperAngle = 30 * DEGTORAD;
+	flipperRightJoint.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
+	flipperRightJoint.localAnchorB.Set(0, 0);
+	joint_rightFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperRightJoint);
+
+	
 
 	return true;
 }
@@ -329,6 +365,23 @@ update_status ModulePhysics::PostUpdate()
 	// target position and draw a red line between both anchor points
 
 	// TODO 4: If the player releases the mouse button, destroy the joint
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+		joint_leftFlipper->EnableMotor(true);
+		joint_leftFlipper->SetMaxMotorTorque(200.0f);
+		joint_leftFlipper->SetMotorSpeed(3600*DEGTORAD);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
+		joint_leftFlipper->EnableMotor(false);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+		joint_rightFlipper->EnableMotor(true);
+		joint_rightFlipper->SetMaxMotorTorque(-20.0f);
+		joint_rightFlipper->SetMotorSpeed(-360 * DEGTORAD);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP) {
+		joint_rightFlipper->EnableMotor(false);
+	}
 
 	return UPDATE_CONTINUE;
 }

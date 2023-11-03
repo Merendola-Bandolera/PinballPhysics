@@ -85,6 +85,7 @@ bool ModuleSceneIntro::Start()
 
 	App->physics->CreateSolidChain(0, 0, tableroExterno, 96);
 
+	
 	return ret;
 }
 
