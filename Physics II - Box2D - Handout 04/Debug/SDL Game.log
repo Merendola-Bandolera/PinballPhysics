@@ -1,9 +1,53 @@
-﻿  ModulePhysics.cpp
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(152,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(153,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(196,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(441,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(488,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(489,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(495,27): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+﻿  ModuleSceneIntro.cpp
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(208,45): warning C4244: 'argument': conversion from 'TYPE' to 'TYPE', possible loss of data
+          with
+          [
+              TYPE=int
+          ]
+          and
+          [
+              TYPE=float
+          ]
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(208,30): warning C4244: 'argument': conversion from 'TYPE' to 'TYPE', possible loss of data
+          with
+          [
+              TYPE=int
+          ]
+          and
+          [
+              TYPE=float
+          ]
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(210,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(212,70): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(212,47): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(215,138): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(215,96): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(215,57): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(215,34): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+          with
+          [
+              TYPE=float
+          ]
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(224,9): warning C4101: 'y': unreferenced local variable
+C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(224,6): warning C4101: 'x': unreferenced local variable
   SDL Game.vcxproj -> C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\Debug\2D Physics - class 4.exe

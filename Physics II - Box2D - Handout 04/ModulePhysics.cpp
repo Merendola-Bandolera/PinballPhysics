@@ -35,16 +35,15 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-
+	flipperforce = -300;
 
 	b2BodyDef groundDef;
 	b2Body* groundBody = world->CreateBody(&groundDef);
 
 	b2EdgeShape groundShape;
 
-	// --- Left flipper ---
-	flipperLeft = App->physics->CreateRectangle(200, 200, 40, 80);
-	flipperLeftPoint = App->physics->CreateCircle(200, 200, 2, 0.0f, false);
+	flipperLeft = App->physics->CreateRectangle(150, 700, 80, 20);
+	flipperLeftPoint = App->physics->CreateCircle(150, 700, 2, 0.0f, false);
 	flipperLeftPoint->body->SetType(b2_staticBody);
 
 	// Flipper Joint (flipper rectangle x flipper circle to give it some movement)
@@ -58,11 +57,11 @@ bool ModulePhysics::Start()
 	flipperLeftJoint.upperAngle = 30 * DEGTORAD;
 	flipperLeftJoint.localAnchorA.Set(PIXEL_TO_METERS(-33), 0);
 	flipperLeftJoint.localAnchorB.Set(0, 0);
-	joint_leftFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint);
+	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint);
 
 	// --- Right flipper ---
-	flipperRight = App->physics->CreateRectangle(400, 200, 40, 80);
-	flipperRightPoint = App->physics->CreateCircle(400, 200, 2, 0.0f, false);
+	flipperRight = App->physics->CreateRectangle(300, 700, 80, 20);
+	flipperRightPoint = App->physics->CreateCircle(300, 700, 2, 0.0f, false);
 	flipperRightPoint->body->SetType(b2_staticBody);
 
 	// Flipper Joint
@@ -71,14 +70,38 @@ bool ModulePhysics::Start()
 	flipperRightJoint.bodyA = flipperRight->body;
 	flipperRightJoint.bodyB = flipperRightPoint->body;
 	flipperRightJoint.referenceAngle = 0 * DEGTORAD;
-	flipperRightJoint.enableLimit = false;
+	flipperRightJoint.enableLimit = true;
 	flipperRightJoint.lowerAngle = -30 * DEGTORAD;
 	flipperRightJoint.upperAngle = 30 * DEGTORAD;
 	flipperRightJoint.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
 	flipperRightJoint.localAnchorB.Set(0, 0);
-	joint_rightFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperRightJoint);
+	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperRightJoint);
 
+	// --- Spring Physics ---
+	springUp = App->physics->CreateRectangle(512, 700, 37, 30);
+	springDown = App->physics->CreateRectangle(512, 755, 38, 10);
+	springDown->body->SetType(b2_staticBody);
 	
+
+	// Create a Joint to Join the top and the bot from the spring
+	b2DistanceJointDef SpringJointDef;
+
+	SpringJointDef.bodyA = springUp->body;
+	SpringJointDef.bodyB = springDown->body;
+
+	SpringJointDef.localAnchorA.Set(0, 0);
+	SpringJointDef.localAnchorB.Set(0, 0);
+
+	SpringJointDef.length = 1.5f;
+
+	SpringJointDef.collideConnected = true;
+
+	SpringJointDef.frequencyHz = 7.0f;
+	SpringJointDef.dampingRatio = 0.05f;
+
+	b2PrismaticJoint* SpringJoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&SpringJointDef);
+
+	App->physics->CreateCircle(512, 650, 18, 0.2f, true);
 
 	return true;
 }
@@ -355,33 +378,26 @@ update_status ModulePhysics::PostUpdate()
 		}
 	}
 
-	// If a body was selected we will attach a mouse joint to it
-	// so we can pull it around
-	// TODO 2: If a body was selected, create a mouse joint
-	// using mouse_joint class property
-
-
-	// TODO 3: If the player keeps pressing the mouse button, update
-	// target position and draw a red line between both anchor points
-
-	// TODO 4: If the player releases the mouse button, destroy the joint
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
-		joint_leftFlipper->EnableMotor(true);
-		joint_leftFlipper->SetMaxMotorTorque(200.0f);
-		joint_leftFlipper->SetMotorSpeed(3600*DEGTORAD);
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+		flipperLeft->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
-		joint_leftFlipper->EnableMotor(false);
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+		flipperRight->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
-		joint_rightFlipper->EnableMotor(true);
-		joint_rightFlipper->SetMaxMotorTorque(-20.0f);
-		joint_rightFlipper->SetMotorSpeed(-360 * DEGTORAD);
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	{
+		if (springForce < 600) {
+			springForce += 30;
+		}
+		springUp->body->ApplyForceToCenter(b2Vec2(0, springForce), 1);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP) {
-		joint_rightFlipper->EnableMotor(false);
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
+		springForce = 0;
+		
+		
 	}
+
 
 	return UPDATE_CONTINUE;
 }

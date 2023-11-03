@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "Box2D/Box2D/Box2D.h"
 
-#define GRAVITY_X -4.0f
+#define GRAVITY_X 0
 #define GRAVITY_Y -7.0f
 
 #define PIXELS_PER_METER 50.0f // if touched change METER_PER_PIXEL too
@@ -66,4 +66,8 @@ private:
 	int flipperforce;
 	b2RevoluteJoint* joint_rightFlipper;
 	b2RevoluteJoint* joint_leftFlipper;
+
+	PhysBody* springUp;
+	PhysBody* springDown;
+	int springForce;
 };
