@@ -35,7 +35,7 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-	flipperforce = -300;
+	flipperforce = -4600;
 
 	b2BodyDef groundDef;
 	b2Body* groundBody = world->CreateBody(&groundDef);
@@ -45,6 +45,7 @@ bool ModulePhysics::Start()
 	flipperLeft = App->physics->CreateRectangle(150, 700, 80, 20);
 	flipperLeftPoint = App->physics->CreateCircle(150, 700, 2, 0.0f, false);
 	flipperLeftPoint->body->SetType(b2_staticBody);
+	
 
 	// Flipper Joint (flipper rectangle x flipper circle to give it some movement)
 	b2RevoluteJointDef flipperLeftJoint;
@@ -101,7 +102,14 @@ bool ModulePhysics::Start()
 
 	b2PrismaticJoint* SpringJoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&SpringJointDef);
 
-	App->physics->CreateCircle(512, 650, 18, 0.2f, true);
+	daBall = App->physics->CreateCircle(512, 650, 18, 0.7f, true);
+
+	App->physics->CreateCircle(312, 350, 30, 2.0f, false);
+
+	App->physics->CreateCircle(212, 250, 30, 2.0f, false);
+
+	App->physics->CreateCircle(50, 750, 30, 8.0f, false);
+	App->physics->CreateCircle(400, 750, 30, 8.0f, false);
 
 	return true;
 }
@@ -139,7 +147,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, float restitutio
 	shape.m_radius = PIXEL_TO_METERS(radius);
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.density = 1.0f;
+	fixture.density = 5.0f;
 	fixture.restitution = restitution;
 
 
@@ -165,7 +173,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 
 	b2FixtureDef fixture;
 	fixture.shape = &box;
-	fixture.density = 1.0f;
+	fixture.density = 10.0f;
 
 	b->CreateFixture(&fixture);
 
@@ -385,15 +393,21 @@ update_status ModulePhysics::PostUpdate()
 		flipperRight->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		daBall->body->SetTransform(b2Vec2(512, 650),0);
+		daBall = App->physics->CreateCircle(512, 650, 18, 0.7f, true);
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		if (springForce < 600) {
-			springForce += 30;
+		if (springForce < 9000) {
+			springForce += 600;
 		}
 		springUp->body->ApplyForceToCenter(b2Vec2(0, springForce), 1);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
-		springForce = 0;
+		springForce = -300;
 		
 		
 	}

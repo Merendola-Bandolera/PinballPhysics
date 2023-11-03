@@ -63,6 +63,7 @@ private:
 	PhysBody* flipperRight;
 	PhysBody* flipperLeftPoint;
 	PhysBody* flipperRightPoint;
+	PhysBody* daBall;
 	int flipperforce;
 	b2RevoluteJoint* joint_rightFlipper;
 	b2RevoluteJoint* joint_leftFlipper;
