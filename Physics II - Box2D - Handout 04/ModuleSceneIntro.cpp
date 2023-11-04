@@ -99,6 +99,33 @@ bool ModuleSceneIntro::Start()
 
 	App->physics->CreateSolidChain(0, 0, pinball, 124);
 
+	int obstucalo1[18] = {
+	584, 121,
+	758, 121,
+	807, 155,
+	807, 227,
+	772, 255,
+	728, 255,
+	692, 205,
+	654, 185,
+	584, 185
+	};
+
+	App->physics->CreateSolidChain(0, 0, obstucalo1, 18);
+
+	int obstucalo2[18] = {
+	330, 136,
+	231, 192,
+	231, 318,
+	270, 357,
+	338, 357,
+	338, 292,
+	307, 261,
+	307, 208,
+	372, 168
+	};
+
+	App->physics->CreateSolidChain(0, 0, obstucalo2, 18);
 	
 	return ret;
 }
