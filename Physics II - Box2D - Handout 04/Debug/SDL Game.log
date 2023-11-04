@@ -1,12 +1,53 @@
-﻿  ModulePhysics.cpp
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(183,23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(184,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(227,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(390,51): warning C4244: 'argument': conversion from 'int' to 'float32', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(393,52): warning C4244: 'argument': conversion from 'int' to 'float32', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(407,48): warning C4244: 'argument': conversion from 'int' to 'float32', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(471,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(518,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(519,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(525,27): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
-  SDL Game.vcxproj -> C:\Users\paums3\Documents\GitHub\PinballPhysics\Physics II - Box2D - Handout 04\Debug\2D Physics - class 4.exe
+﻿  ModuleSceneIntro.cpp
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(222,45): warning C4244: 'argumento': conversión de 'TYPE' a 'TYPE'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+          and
+          [
+              TYPE=float
+          ]
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(222,30): warning C4244: 'argumento': conversión de 'TYPE' a 'TYPE'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+          and
+          [
+              TYPE=float
+          ]
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(224,18): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(226,70): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+          with
+          [
+              TYPE=float
+          ]
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(226,47): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+          with
+          [
+              TYPE=float
+          ]
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(229,138): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+          with
+          [
+              TYPE=float
+          ]
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(229,96): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+          with
+          [
+              TYPE=float
+          ]
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(229,57): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+          with
+          [
+              TYPE=float
+          ]
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(229,34): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+          with
+          [
+              TYPE=float
+          ]
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(238,9): warning C4101: 'y': variable local sin referencia
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModuleSceneIntro.cpp(238,6): warning C4101: 'x': variable local sin referencia
+  SDL Game.vcxproj -> D:\PinballPhysics\Physics II - Box2D - Handout 04\Debug\2D Physics - class 4.exe
