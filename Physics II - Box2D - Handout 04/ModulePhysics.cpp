@@ -154,9 +154,11 @@ bool ModulePhysics::Start()
 	daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
 
 	//bumper rectangulo
-	App->physics->CreateRectangle(380, 300, 55, 30, 2.0f, true);
-	//bumper sirculo
-	App->physics->CreateCircle(870, 700, 40, 3.0f, false);
+	App->physics->CreateRectangle(463, 670, 80, 10, 1.5f, true);
+	App->physics->CreateRectangle(165, 660, 90, 10, 1.5f, true);
+	App->physics->CreateRectangle(30, 483, 10, 90, 1.5f, true);
+	App->physics->CreateRectangle(775, 670, 115, 10, 1.5f, true);
+	App->physics->CreateRectangle(895, 560, 10, 80, 1.5f, true);
 
 
 	return true;

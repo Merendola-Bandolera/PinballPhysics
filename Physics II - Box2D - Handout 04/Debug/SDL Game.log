@@ -1,14 +1,14 @@
 ﻿  ModulePhysics.cpp
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(235,23): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(236,25): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(279,21): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(442,51): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(443,52): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(447,52): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(448,53): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(462,48): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(529,21): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(576,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(577,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(583,27): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
-  SDL Game.vcxproj -> C:\Users\pau\Downloads\Physics II - Box2D - Handout 04\PinballPhysics\Physics II - Box2D - Handout 04\Debug\2D Physics - class 4.exe
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(237,23): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(238,25): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(281,21): warning C4018: '<': no coinciden signed/unsigned
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(444,51): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(445,52): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(449,52): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(450,53): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(464,48): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(531,21): warning C4018: '<': no coinciden signed/unsigned
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(578,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(579,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+D:\PinballPhysics\Physics II - Box2D - Handout 04\ModulePhysics.cpp(585,27): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
+  SDL Game.vcxproj -> D:\PinballPhysics\Physics II - Box2D - Handout 04\Debug\2D Physics - class 4.exe
