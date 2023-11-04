@@ -50,9 +50,9 @@ public:
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
-
+	int imunderyourskin = 0;
 private:
-
+	bool launching;
 	bool debug;
 	b2World* world;
 	b2MouseJoint* mouse_joint;

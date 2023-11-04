@@ -4,8 +4,12 @@
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
 #include "p2Point.h"
+#include "ModuleWindow.h"
 #include "math.h"
 #include "ModuleSceneIntro.h"
+#include <string>
+#include <random>
+#include <time.h>
 
 #ifdef _DEBUG
 #pragma comment( lib, "Box2D/libx86/Debug/Box2D.lib" )
@@ -18,6 +22,7 @@ ModulePhysics::ModulePhysics(Application* app, bool start_enabled) : Module(app,
 	world = NULL;
 	mouse_joint = NULL;
 	debug = true;
+	
 }
 
 // Destructor
@@ -43,8 +48,8 @@ bool ModulePhysics::Start()
 
 	b2EdgeShape groundShape;
 
-	App->scene_intro->flipperLe.add(flipperLeft = App->physics->CreateRectangle(230, 600, 70, 20, 0, false));
-	flipperLeftPoint = App->physics->CreateCircle(230, 600, 2, 0.0f, false);
+	App->scene_intro->flipperLe.add(flipperLeft = App->physics->CreateRectangle(230, 570, 70, 20, 0, false));
+	flipperLeftPoint = App->physics->CreateCircle(230, 570, 2, 0.0f, false);
 	flipperLeftPoint->body->SetType(b2_staticBody);
 	
 
@@ -62,8 +67,8 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint);
 
 	// --- Right flipper ---
-	App->scene_intro->flipperRi.add(flipperRight = App->physics->CreateRectangle(410, 600, 70, 20,0, false));
-	flipperRightPoint = App->physics->CreateCircle(410, 600, 2, 0.0f, false);
+	App->scene_intro->flipperRi.add(flipperRight = App->physics->CreateRectangle(410, 570, 70, 20,0, false));
+	flipperRightPoint = App->physics->CreateCircle(410, 570, 2, 0.0f, false);
 	flipperRightPoint->body->SetType(b2_staticBody);
 
 	// Flipper Joint
@@ -80,8 +85,8 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperRightJoint);
 
 
-	App->scene_intro->flipperLe.add(flipperLeft2 = App->physics->CreateRectangle(530, 600, 70, 20,0,false));
-	flipperLeftPoint2 = App->physics->CreateCircle(530, 600, 2, 0.0f, false);
+	App->scene_intro->flipperLe.add(flipperLeft2 = App->physics->CreateRectangle(530, 570, 70, 20,0,false));
+	flipperLeftPoint2 = App->physics->CreateCircle(530, 570, 2, 0.0f, false);
 	flipperLeftPoint2->body->SetType(b2_staticBody);
 
 
@@ -99,8 +104,8 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_leftFlipper2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint2);
 
 	// --- Right flipper ---
-	App->scene_intro->flipperRi.add(flipperRight2 = App->physics->CreateRectangle(710, 600, 70, 20,0,false));
-	flipperRightPoint2 = App->physics->CreateCircle(710, 600, 2, 0.0f, false);
+	App->scene_intro->flipperRi.add(flipperRight2 = App->physics->CreateRectangle(710, 570, 70, 20,0,false));
+	flipperRightPoint2 = App->physics->CreateCircle(710, 570, 2, 0.0f, false);
 	flipperRightPoint2->body->SetType(b2_staticBody);
 
 	// Flipper Joint
@@ -124,7 +129,7 @@ bool ModulePhysics::Start()
 
 
 
-
+	srand(time(NULL));
 
 
 
@@ -300,7 +305,7 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 	fixture.shape = &shape;
 
 	b->CreateFixture(&fixture);
-
+	
 	delete p;
 
 	PhysBody* pbody = new PhysBody();
@@ -317,9 +322,18 @@ update_status ModulePhysics::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		debug = !debug;
 
-	if (!debug)
-		return UPDATE_CONTINUE;
+	/*if (!debug)
+		return UPDATE_CONTINUE;*/
 
+
+
+	 char buffer[50]; 
+
+	 sprintf_s(buffer, "Score: %d", imunderyourskin); // Format the string
+
+	 char* myCharPointer = _strdup(buffer); // Allocate memory and copy the string
+
+	App->window->SetTitle(myCharPointer);
 	// Bonus code: this will iterate all objects in the world and draw the circles
 	// You need to provide your own macro to translate meters to pixels
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
@@ -362,19 +376,22 @@ update_status ModulePhysics::PostUpdate()
 			// Draw chains contour -------------------------------------------
 			case b2Shape::e_chain:
 			{
-				b2ChainShape* shape = (b2ChainShape*)f->GetShape();
-				b2Vec2 prev, v;
+				if (debug) {
+					b2ChainShape* shape = (b2ChainShape*)f->GetShape();
+					b2Vec2 prev, v;
 
-				for (int32 i = 0; i < shape->m_count; ++i)
-				{
-					v = b->GetWorldPoint(shape->m_vertices[i]);
-					if (i > 0)
-						App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
-					prev = v;
+					for (int32 i = 0; i < shape->m_count; ++i)
+					{
+						v = b->GetWorldPoint(shape->m_vertices[i]);
+						if (i > 0)
+							App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
+						prev = v;
+					}
+
+					v = b->GetWorldPoint(shape->m_vertices[0]);
+					App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
 				}
-
-				v = b->GetWorldPoint(shape->m_vertices[0]);
-				App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
+			
 			}
 			break;
 
@@ -460,23 +477,26 @@ update_status ModulePhysics::PostUpdate()
 		flipperRight2->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (daBall->body->GetPosition().y > 15)
 	{
 		daBall->body->SetTransform(b2Vec2(512, 650),0);
 		daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
 		App->scene_intro->circlexup.add(daBall);
 	}
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && launching == false)
+	{
+		launching = true;
+	}
+	if (launching == true)
 	{
 		if (springForce < 9000) {
-			springForce += 600;
+			springForce += 300;
 		}
 		springUp->body->ApplyForceToCenter(b2Vec2(0, springForce), 1);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
+	if (springForce >= rand() % 9000 + 7000) {
 		springForce = -300;
-		
+		launching = false;
 		
 	}
 
@@ -607,4 +627,9 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 
 	if (physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+
+	if (physA == daBall || physB == daBall && physA != springUp || physB != springUp)
+		imunderyourskin += 100;
+	
 }
+
