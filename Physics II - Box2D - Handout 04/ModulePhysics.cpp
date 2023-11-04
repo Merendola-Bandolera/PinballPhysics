@@ -42,8 +42,8 @@ bool ModulePhysics::Start()
 
 	b2EdgeShape groundShape;
 
-	flipperLeft = App->physics->CreateRectangle(150, 700, 80, 20);
-	flipperLeftPoint = App->physics->CreateCircle(150, 700, 2, 0.0f, false);
+	flipperLeft = App->physics->CreateRectangle(230, 600, 70, 20, 0, false);
+	flipperLeftPoint = App->physics->CreateCircle(230, 600, 2, 0.0f, false);
 	flipperLeftPoint->body->SetType(b2_staticBody);
 	
 
@@ -61,8 +61,8 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint);
 
 	// --- Right flipper ---
-	flipperRight = App->physics->CreateRectangle(300, 700, 80, 20);
-	flipperRightPoint = App->physics->CreateCircle(300, 700, 2, 0.0f, false);
+	flipperRight = App->physics->CreateRectangle(410, 600, 70, 20,0, false);
+	flipperRightPoint = App->physics->CreateCircle(410, 600, 2, 0.0f, false);
 	flipperRightPoint->body->SetType(b2_staticBody);
 
 	// Flipper Joint
@@ -78,9 +78,58 @@ bool ModulePhysics::Start()
 	flipperRightJoint.localAnchorB.Set(0, 0);
 	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperRightJoint);
 
+
+	flipperLeft2 = App->physics->CreateRectangle(530, 600, 70, 20,0,false);
+	flipperLeftPoint2 = App->physics->CreateCircle(530, 600, 2, 0.0f, false);
+	flipperLeftPoint2->body->SetType(b2_staticBody);
+
+
+	// Flipper Joint (flipper rectangle x flipper circle to give it some movement)
+	b2RevoluteJointDef flipperLeftJoint2;
+
+	flipperLeftJoint2.bodyA = flipperLeft2->body;
+	flipperLeftJoint2.bodyB = flipperLeftPoint2->body;
+	flipperLeftJoint2.referenceAngle = 0 * DEGTORAD;
+	flipperLeftJoint2.enableLimit = true;
+	flipperLeftJoint2.lowerAngle = -30 * DEGTORAD;
+	flipperLeftJoint2.upperAngle = 30 * DEGTORAD;
+	flipperLeftJoint2.localAnchorA.Set(PIXEL_TO_METERS(-33), 0);
+	flipperLeftJoint2.localAnchorB.Set(0, 0);
+	b2RevoluteJoint* joint_leftFlipper2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint2);
+
+	// --- Right flipper ---
+	flipperRight2 = App->physics->CreateRectangle(710, 600, 70, 20,0,false);
+	flipperRightPoint2 = App->physics->CreateCircle(710, 600, 2, 0.0f, false);
+	flipperRightPoint2->body->SetType(b2_staticBody);
+
+	// Flipper Joint
+	b2RevoluteJointDef flipperRightJoint2;
+
+	flipperRightJoint2.bodyA = flipperRight2->body;
+	flipperRightJoint2.bodyB = flipperRightPoint2->body;
+	flipperRightJoint2.referenceAngle = 0 * DEGTORAD;
+	flipperRightJoint2.enableLimit = true;
+	flipperRightJoint2.lowerAngle = -30 * DEGTORAD;
+	flipperRightJoint2.upperAngle = 30 * DEGTORAD;
+	flipperRightJoint2.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
+	flipperRightJoint2.localAnchorB.Set(0, 0);
+	b2RevoluteJoint* joint_rightFlipper2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperRightJoint2);
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// --- Spring Physics ---
-	springUp = App->physics->CreateRectangle(512, 700, 37, 30);
-	springDown = App->physics->CreateRectangle(512, 755, 38, 10);
+	springUp = App->physics->CreateRectangle(980, 700, 55, 30,0,false);
+	springDown = App->physics->CreateRectangle(987, 755, 55, 10,0,false);
 	springDown->body->SetType(b2_staticBody);
 	
 
@@ -102,14 +151,13 @@ bool ModulePhysics::Start()
 
 	b2PrismaticJoint* SpringJoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&SpringJointDef);
 
-	daBall = App->physics->CreateCircle(512, 650, 18, 0.7f, true);
+	daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
 
-	App->physics->CreateCircle(312, 350, 30, 2.0f, false);
+	//bumper rectangulo
+	App->physics->CreateRectangle(380, 300, 55, 30, 2.0f, true);
+	//bumper sirculo
+	App->physics->CreateCircle(870, 700, 40, 3.0f, false);
 
-	App->physics->CreateCircle(212, 250, 30, 2.0f, false);
-
-	App->physics->CreateCircle(50, 750, 30, 8.0f, false);
-	App->physics->CreateCircle(400, 750, 30, 8.0f, false);
 
 	return true;
 }
@@ -161,10 +209,14 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, float restitutio
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, float restitution,bool physics)
 {
 	b2BodyDef body;
+	if (physics == false)
 	body.type = b2_dynamicBody;
+	else 
+	body.type = b2_staticBody;
+
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -174,7 +226,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 	b2FixtureDef fixture;
 	fixture.shape = &box;
 	fixture.density = 10.0f;
-
+	fixture.restitution = restitution;
 	b->CreateFixture(&fixture);
 
 	PhysBody* pbody = new PhysBody();
@@ -388,15 +440,18 @@ update_status ModulePhysics::PostUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 		flipperLeft->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
+		flipperLeft2->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
+
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
 		flipperRight->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
+		flipperRight2->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		daBall->body->SetTransform(b2Vec2(512, 650),0);
-		daBall = App->physics->CreateCircle(512, 650, 18, 0.7f, true);
+		daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
@@ -411,6 +466,9 @@ update_status ModulePhysics::PostUpdate()
 		
 		
 	}
+
+	
+
 
 
 	return UPDATE_CONTINUE;

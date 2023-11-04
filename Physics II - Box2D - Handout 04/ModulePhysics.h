@@ -43,7 +43,7 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius, float restitution, bool physics);
-	PhysBody* CreateRectangle(int x, int y, int width, int height);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, float restitution, bool physics);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 	PhysBody* ModulePhysics::CreateSolidChain(int x, int y, int* points, int size);
@@ -63,10 +63,19 @@ private:
 	PhysBody* flipperRight;
 	PhysBody* flipperLeftPoint;
 	PhysBody* flipperRightPoint;
+
+	PhysBody* flipperLeft2;
+	PhysBody* flipperRight2;
+	PhysBody* flipperLeftPoint2;
+	PhysBody* flipperRightPoint2;
+
 	PhysBody* daBall;
 	int flipperforce;
 	b2RevoluteJoint* joint_rightFlipper;
 	b2RevoluteJoint* joint_leftFlipper;
+
+	b2RevoluteJoint* joint_rightFlipper2;
+	b2RevoluteJoint* joint_leftFlipper2;
 
 	PhysBody* springUp;
 	PhysBody* springDown;
