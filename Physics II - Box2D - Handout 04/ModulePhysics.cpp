@@ -161,19 +161,9 @@ bool ModulePhysics::Start()
 
 	App->scene_intro->circlexup.add(daBall);
 	//bumper rectangulo
-	App->scene_intro->boxes.add(App->physics->CreateRectangle(463, 670, 90, 10, 1.5f, true));
-	App->scene_intro->boxes.add(App->physics->CreateRectangle(165, 660, 90, 10, 1.5f, true));
-	App->scene_intro->boxes.add(App->physics->CreateRectangle(775, 670, 90, 10, 1.5f, true));
-	App->scene_intro->boxesV.add(App->physics->CreateRectangle(30, 483, 10, 90, 1.5f, true));
-	App->scene_intro->boxesV.add(App->physics->CreateRectangle(895, 560, 10, 90, 1.5f, true));
-																						  
-	App->scene_intro->boxesV.add(App->physics->CreateRectangle(220, 255, 10, 90, 1.5f, true));
-	App->scene_intro->boxesV.add(App->physics->CreateRectangle(347, 325, 10, 90, 1.5f, true));
-	App->scene_intro->boxesV.add(App->physics->CreateRectangle(818, 187, 10, 90, 1.5f, true));
-	App->scene_intro->boxes.add(App->physics->CreateRectangle(670, 110, 90, 10, 1.5f, true));
-	App->scene_intro->boxes.add(App->physics->CreateRectangle(55, 160, 90, 10, 1.5f, true));
+	
 
-	App->scene_intro->circles.add(App->physics->CreateCircle(450, 200, 20, 1.5f, false)); //PORQUE TE CAES IMBECIL pues porque necesitaba el false aspergero
+	App->scene_intro->circles.add(App->physics->CreateCircle(450, 200, 20, 1.5f, false));
 
 
 	return true;
