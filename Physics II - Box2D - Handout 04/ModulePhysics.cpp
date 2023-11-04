@@ -5,6 +5,7 @@
 #include "ModulePhysics.h"
 #include "p2Point.h"
 #include "math.h"
+#include "ModuleSceneIntro.h"
 
 #ifdef _DEBUG
 #pragma comment( lib, "Box2D/libx86/Debug/Box2D.lib" )
@@ -42,7 +43,7 @@ bool ModulePhysics::Start()
 
 	b2EdgeShape groundShape;
 
-	flipperLeft = App->physics->CreateRectangle(230, 600, 70, 20, 0, false);
+	App->scene_intro->flipperLe.add(flipperLeft = App->physics->CreateRectangle(230, 600, 70, 20, 0, false));
 	flipperLeftPoint = App->physics->CreateCircle(230, 600, 2, 0.0f, false);
 	flipperLeftPoint->body->SetType(b2_staticBody);
 	
@@ -61,7 +62,7 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint);
 
 	// --- Right flipper ---
-	flipperRight = App->physics->CreateRectangle(410, 600, 70, 20,0, false);
+	App->scene_intro->flipperRi.add(flipperRight = App->physics->CreateRectangle(410, 600, 70, 20,0, false));
 	flipperRightPoint = App->physics->CreateCircle(410, 600, 2, 0.0f, false);
 	flipperRightPoint->body->SetType(b2_staticBody);
 
@@ -79,7 +80,7 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperRightJoint);
 
 
-	flipperLeft2 = App->physics->CreateRectangle(530, 600, 70, 20,0,false);
+	App->scene_intro->flipperLe.add(flipperLeft2 = App->physics->CreateRectangle(530, 600, 70, 20,0,false));
 	flipperLeftPoint2 = App->physics->CreateCircle(530, 600, 2, 0.0f, false);
 	flipperLeftPoint2->body->SetType(b2_staticBody);
 
@@ -98,7 +99,7 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_leftFlipper2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint2);
 
 	// --- Right flipper ---
-	flipperRight2 = App->physics->CreateRectangle(710, 600, 70, 20,0,false);
+	App->scene_intro->flipperRi.add(flipperRight2 = App->physics->CreateRectangle(710, 600, 70, 20,0,false));
 	flipperRightPoint2 = App->physics->CreateCircle(710, 600, 2, 0.0f, false);
 	flipperRightPoint2->body->SetType(b2_staticBody);
 
@@ -128,7 +129,7 @@ bool ModulePhysics::Start()
 
 
 	// --- Spring Physics ---
-	springUp = App->physics->CreateRectangle(980, 700, 55, 30,0,false);
+	App->scene_intro->springs.add(springUp = App->physics->CreateRectangle(980, 700, 55, 30,0,false));
 	springDown = App->physics->CreateRectangle(987, 755, 55, 10,0,false);
 	springDown->body->SetType(b2_staticBody);
 	
@@ -153,20 +154,21 @@ bool ModulePhysics::Start()
 
 	daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
 
+	App->scene_intro->circlexup.add(daBall);
 	//bumper rectangulo
-	App->physics->CreateRectangle(463, 670, 90, 10, 1.5f, true);
-	App->physics->CreateRectangle(165, 660, 90, 10, 1.5f, true);	
-	App->physics->CreateRectangle(775, 670, 90, 10, 1.5f, true);
-	App->physics->CreateRectangle(30, 483, 10, 90, 1.5f, true);
-	App->physics->CreateRectangle(895, 560, 10, 90, 1.5f, true);
+	App->scene_intro->boxes.add(App->physics->CreateRectangle(463, 670, 90, 10, 1.5f, true));
+	App->scene_intro->boxes.add(App->physics->CreateRectangle(165, 660, 90, 10, 1.5f, true));
+	App->scene_intro->boxes.add(App->physics->CreateRectangle(775, 670, 90, 10, 1.5f, true));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(30, 483, 10, 90, 1.5f, true));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(895, 560, 10, 90, 1.5f, true));
+																						  
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(220, 255, 10, 90, 1.5f, true));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(347, 325, 10, 90, 1.5f, true));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(818, 187, 10, 90, 1.5f, true));
+	App->scene_intro->boxes.add(App->physics->CreateRectangle(670, 110, 90, 10, 1.5f, true));
+	App->scene_intro->boxes.add(App->physics->CreateRectangle(55, 160, 90, 10, 1.5f, true));
 
-	App->physics->CreateRectangle(220, 255, 10, 90, 1.5f, true);
-	App->physics->CreateRectangle(347, 325, 10, 90, 1.5f, true);
-	App->physics->CreateRectangle(818, 187, 10, 90, 1.5f, true);
-	App->physics->CreateRectangle(670, 110, 90, 10, 1.5f, true);
-	App->physics->CreateRectangle(55, 160, 90, 10, 1.5f, true);
-
-	//App->physics->CreateCircle(450, 200, 20, 1.5f, true); //PORQUE TE CAES IMBECIL
+	App->scene_intro->circles.add(App->physics->CreateCircle(450, 200, 20, 1.5f, false)); //PORQUE TE CAES IMBECIL pues porque necesitaba el false aspergero
 
 
 	return true;
@@ -462,6 +464,7 @@ update_status ModulePhysics::PostUpdate()
 	{
 		daBall->body->SetTransform(b2Vec2(512, 650),0);
 		daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
+		App->scene_intro->circlexup.add(daBall);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
@@ -476,10 +479,6 @@ update_status ModulePhysics::PostUpdate()
 		
 		
 	}
-
-	
-
-
 
 	return UPDATE_CONTINUE;
 }
