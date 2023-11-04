@@ -154,17 +154,17 @@ bool ModulePhysics::Start()
 	daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
 
 	//bumper rectangulo
-	App->physics->CreateRectangle(463, 670, 80, 10, 1.5f, true);
-	App->physics->CreateRectangle(165, 660, 90, 10, 1.5f, true);
+	App->physics->CreateRectangle(463, 670, 90, 10, 1.5f, true);
+	App->physics->CreateRectangle(165, 660, 90, 10, 1.5f, true);	
+	App->physics->CreateRectangle(775, 670, 90, 10, 1.5f, true);
 	App->physics->CreateRectangle(30, 483, 10, 90, 1.5f, true);
-	App->physics->CreateRectangle(775, 670, 115, 10, 1.5f, true);
-	App->physics->CreateRectangle(895, 560, 10, 80, 1.5f, true);
+	App->physics->CreateRectangle(895, 560, 10, 90, 1.5f, true);
 
-	App->physics->CreateRectangle(220, 255, 10, 120, 1.5f, true);
-	App->physics->CreateRectangle(347, 325, 10, 60, 1.5f, true);
-	App->physics->CreateRectangle(818, 187, 10, 60, 1.5f, true);
-	App->physics->CreateRectangle(670, 110, 170, 10, 1.5f, true);
-	App->physics->CreateRectangle(55, 160, 60, 10, 1.5f, true);
+	App->physics->CreateRectangle(220, 255, 10, 90, 1.5f, true);
+	App->physics->CreateRectangle(347, 325, 10, 90, 1.5f, true);
+	App->physics->CreateRectangle(818, 187, 10, 90, 1.5f, true);
+	App->physics->CreateRectangle(670, 110, 90, 10, 1.5f, true);
+	App->physics->CreateRectangle(55, 160, 90, 10, 1.5f, true);
 
 	//App->physics->CreateCircle(450, 200, 20, 1.5f, true); //PORQUE TE CAES IMBECIL
 
