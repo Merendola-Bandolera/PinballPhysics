@@ -51,10 +51,14 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 	int imunderyourskin = 0;
+	int lives = 3;
+	int bonusScore;
+	b2World* world;
 private:
 	bool launching;
 	bool debug;
-	b2World* world;
+	float gravity = 7.0f;
+	float restitution = 2.5f;
 	b2MouseJoint* mouse_joint;
 	b2Body* ground;
 	b2Body* selected_body = nullptr;
@@ -68,6 +72,8 @@ private:
 	PhysBody* flipperRight2;
 	PhysBody* flipperLeftPoint2;
 	PhysBody* flipperRightPoint2;
+
+	PhysBody* SpecialBumper;
 
 	PhysBody* daBall;
 	int flipperforce;

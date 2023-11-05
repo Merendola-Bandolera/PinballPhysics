@@ -171,8 +171,10 @@ bool ModulePhysics::Start()
 
 	App->scene_intro->circles.add(App->physics->CreateCircle(80, 100, 15, 1.5f, false));
 	App->scene_intro->circles.add(App->physics->CreateCircle(820, 500, 15, 1.5f, false));
-	App->scene_intro->circles.add(App->physics->CreateCircle(1015, 120, 15, 2.5f, false));
+	SpecialBumper  = App->physics->CreateCircle(1015, 120, 15, 2.5f, false);
 	
+	App->scene_intro->circles.add(SpecialBumper);
+
 	App->scene_intro->circles.add(App->physics->CreateCircle(190, 640, 15, 3.0f, false));
 	App->scene_intro->circles.add(App->physics->CreateCircle(439, 620, 15, 1.5f, false));
 	App->scene_intro->circles.add(App->physics->CreateCircle(493, 620, 15, 1.5f, false));
@@ -196,6 +198,30 @@ update_status ModulePhysics::PreUpdate()
 				pb1->listener->OnCollision(pb1, pb2);
 		}
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
+	{
+		gravity += 0.2f;
+		world->SetGravity(b2Vec2(0, gravity));
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT)
+	{
+		gravity -= 0.2f;
+		world->SetGravity(b2Vec2(0, gravity));
+	}
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT)
+	{
+		restitution += 0.2f;
+		SpecialBumper->body->GetFixtureList()->SetRestitution(restitution);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT)
+	{
+		restitution -= 0.2f;
+		SpecialBumper->body->GetFixtureList()->SetRestitution(restitution);
+	}
+
 
 	return UPDATE_CONTINUE;
 }
@@ -327,15 +353,29 @@ update_status ModulePhysics::PostUpdate()
 	/*if (!debug)
 		return UPDATE_CONTINUE;*/
 
+	if (bonusScore > 10000) 
+	{
+		lives++;
+		bonusScore = 0;
+	}
 
+	 char buffer[200]; 
 
-	 char buffer[50]; 
+	 if (lives > 0) {
+		 sprintf_s(buffer, "Score: %d Lives: %d Gravity: %f, Restitution: %f", imunderyourskin, lives,gravity, restitution); // Format the string
 
-	 sprintf_s(buffer, "Score: %d", imunderyourskin); // Format the string
+		 char* myCharPointer = _strdup(buffer); // Allocate memory and copy the string
 
-	 char* myCharPointer = _strdup(buffer); // Allocate memory and copy the string
+		 App->window->SetTitle(myCharPointer);
+	 }
+	 else {
+		 sprintf_s(buffer, "Score: %d GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER ", imunderyourskin); // Format the string
 
-	App->window->SetTitle(myCharPointer);
+		 char* myCharPointer = _strdup(buffer); // Allocate memory and copy the string
+
+		 App->window->SetTitle(myCharPointer);
+	 }
+	
 	// Bonus code: this will iterate all objects in the world and draw the circles
 	// You need to provide your own macro to translate meters to pixels
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
@@ -480,11 +520,19 @@ update_status ModulePhysics::PostUpdate()
 		flipperRight2->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
 	}
 
-	if (daBall->body->GetPosition().y > 15)
+
+
+	if (daBall->body->GetPosition().y > 15 && lives > 0)
 	{
+		lives--;
+		
 		daBall->body->SetTransform(b2Vec2(512, 650),0);
-		daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
-		App->scene_intro->circlexup.add(daBall);
+		if (lives > 0)
+		{
+			daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
+			App->scene_intro->circlexup.add(daBall);
+		}
+
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && launching == false)
 	{
@@ -631,8 +679,11 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 	if (physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
 
-	if (physA == daBall || physB == daBall && physA != springUp || physB != springUp)
+	if (physA == daBall || physB == daBall && physA != springUp || physB != springUp) {
+		bonusScore += 100;
 		imunderyourskin += 100;
+	}
+		
 	
 }
 
