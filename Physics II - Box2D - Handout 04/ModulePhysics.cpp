@@ -48,8 +48,8 @@ bool ModulePhysics::Start()
 
 	b2EdgeShape groundShape;
 
-	App->scene_intro->flipperLe.add(flipperLeft = App->physics->CreateRectangle(230, 570, 70, 20, 0, false));
-	flipperLeftPoint = App->physics->CreateCircle(230, 570, 2, 0.0f, false);
+	App->scene_intro->flipperLe.add(flipperLeft = App->physics->CreateRectangle(230, 620, 70, 20, 0, false));
+	flipperLeftPoint = App->physics->CreateCircle(230, 620, 2, 0.0f, false);
 	flipperLeftPoint->body->SetType(b2_staticBody);
 	
 
@@ -67,8 +67,8 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint);
 
 	// --- Right flipper ---
-	App->scene_intro->flipperRi.add(flipperRight = App->physics->CreateRectangle(410, 570, 70, 20,0, false));
-	flipperRightPoint = App->physics->CreateCircle(410, 570, 2, 0.0f, false);
+	App->scene_intro->flipperRi.add(flipperRight = App->physics->CreateRectangle(410, 620, 70, 20,0, false));
+	flipperRightPoint = App->physics->CreateCircle(410, 620, 2, 0.0f, false);
 	flipperRightPoint->body->SetType(b2_staticBody);
 
 	// Flipper Joint
@@ -85,8 +85,8 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperRightJoint);
 
 
-	App->scene_intro->flipperLe.add(flipperLeft2 = App->physics->CreateRectangle(530, 570, 70, 20,0,false));
-	flipperLeftPoint2 = App->physics->CreateCircle(530, 570, 2, 0.0f, false);
+	App->scene_intro->flipperLe.add(flipperLeft2 = App->physics->CreateRectangle(530, 620, 70, 20,0,false));
+	flipperLeftPoint2 = App->physics->CreateCircle(530, 620, 2, 0.0f, false);
 	flipperLeftPoint2->body->SetType(b2_staticBody);
 
 
@@ -104,8 +104,8 @@ bool ModulePhysics::Start()
 	b2RevoluteJoint* joint_leftFlipper2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&flipperLeftJoint2);
 
 	// --- Right flipper ---
-	App->scene_intro->flipperRi.add(flipperRight2 = App->physics->CreateRectangle(710, 570, 70, 20,0,false));
-	flipperRightPoint2 = App->physics->CreateCircle(710, 570, 2, 0.0f, false);
+	App->scene_intro->flipperRi.add(flipperRight2 = App->physics->CreateRectangle(710, 620, 70, 20,0,false));
+	flipperRightPoint2 = App->physics->CreateCircle(710, 620, 2, 0.0f, false);
 	flipperRightPoint2->body->SetType(b2_staticBody);
 
 	// Flipper Joint
@@ -160,10 +160,14 @@ bool ModulePhysics::Start()
 	daBall = App->physics->CreateCircle(1000, 550, 25, 0.4f, true);
 
 	App->scene_intro->circlexup.add(daBall);
-	//bumper rectangulo
+	//bumper circulo
 	
 
-	App->scene_intro->circles.add(App->physics->CreateCircle(450, 200, 20, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(420, 250, 20, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(170, 500, 20, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(780, 450, 20, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(400, 450, 20, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(463, 580, 20, 1.5f, false));
 
 
 	return true;
