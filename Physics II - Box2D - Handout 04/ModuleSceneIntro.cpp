@@ -24,7 +24,7 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
-	background = App->textures->Load("pinball/Spritesheet1.png");
+	background = App->textures->Load("pinball/fondo bueno.png");
 	circle = App->textures->Load("pinball/bumpO.png"); 
 	circleChup = App->textures->Load("pinball/ballchupa.png");
 	box = App->textures->Load("pinball/bumpH.png");
@@ -160,7 +160,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	SDL_Rect bg = { 203,0,1025,768 };
+	SDL_Rect bg = { 0,0,1024,768 };
 	App->renderer->Blit(background, 0, 0, &bg);
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
