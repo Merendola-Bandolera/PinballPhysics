@@ -52,6 +52,8 @@ public:
 	void BeginContact(b2Contact* contact);
 	int imunderyourskin = 0;
 	int lives = 3;
+	float fps = 60;
+	bool limitFps;
 	int bonusScore;
 	b2World* world;
 private:

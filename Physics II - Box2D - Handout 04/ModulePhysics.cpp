@@ -222,6 +222,26 @@ update_status ModulePhysics::PreUpdate()
 		SpecialBumper->body->GetFixtureList()->SetRestitution(restitution);
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_5) == KEY_REPEAT)
+	{
+		fps += 0.1f;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_6) == KEY_REPEAT)
+	{
+		fps -= 0.1f;
+	}
+
+
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	{
+		if (limitFps == true) {
+			limitFps = false;
+		}
+		else {
+			limitFps = true;
+		}
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -362,7 +382,7 @@ update_status ModulePhysics::PostUpdate()
 	 char buffer[200]; 
 
 	 if (lives > 0) {
-		 sprintf_s(buffer, "Score: %d Lives: %d Gravity: %f, Restitution: %f", imunderyourskin, lives,gravity, restitution); // Format the string
+		 sprintf_s(buffer, "Score: %d Lives: %d Gravity: %f, Restitution: %f, Limit Fps: %d, FPS: %f", imunderyourskin, lives,gravity, restitution, limitFps, fps); // Format the string
 
 		 char* myCharPointer = _strdup(buffer); // Allocate memory and copy the string
 
