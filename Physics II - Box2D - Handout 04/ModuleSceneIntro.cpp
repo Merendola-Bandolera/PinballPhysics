@@ -102,6 +102,50 @@ bool ModuleSceneIntro::Start()
 
 	App->physics->CreateSolidChain(0, 0, tableroExterno, 118);
 
+	int obstucalos[30] = {
+	190, 216,
+	148, 258,
+	182, 274,
+	214, 305,
+	224, 337,
+	230, 370,
+	241, 337,
+	260, 306,
+	291, 286,
+	327, 279,
+	304, 266,
+	275, 253,
+	252, 231,
+	237, 200,
+	230, 177
+	};
+
+	App->physics->CreateSolidChain(0, 0, obstucalos, 30);
+
+	int obstucalos2[38] = {
+	694, 309,
+	686, 274,
+	658, 255,
+	627, 254,
+	597, 266,
+	576, 289,
+	569, 324,
+	590, 355,
+	532, 355,
+	519, 327,
+	519, 267,
+	519, 210,
+	559, 170,
+	609, 148,
+	660, 152,
+	699, 166,
+	734, 201,
+	742, 242,
+	742, 310
+	};
+
+	App->physics->CreateSolidChain(0, 0, obstucalos2, 38);
+
 	return ret;
 }
 
