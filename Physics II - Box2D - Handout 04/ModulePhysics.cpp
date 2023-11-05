@@ -21,7 +21,7 @@ ModulePhysics::ModulePhysics(Application* app, bool start_enabled) : Module(app,
 {
 	world = NULL;
 	mouse_joint = NULL;
-	debug = true;
+	debug = false;
 	
 }
 
@@ -349,7 +349,7 @@ update_status ModulePhysics::PostUpdate()
 			{
 				b2CircleShape* shape = (b2CircleShape*)f->GetShape();
 				b2Vec2 pos = f->GetBody()->GetPosition();
-
+				if (debug)
 				App->renderer->DrawCircle(METERS_TO_PIXELS(pos.x), METERS_TO_PIXELS(pos.y), METERS_TO_PIXELS(shape->m_radius), 255, 255, 255);
 			}
 			break;
@@ -364,7 +364,7 @@ update_status ModulePhysics::PostUpdate()
 				for (int32 i = 0; i < count; ++i)
 				{
 					v = b->GetWorldPoint(polygonShape->GetVertex(i));
-					if (i > 0)
+					if (i > 0&& debug)
 						App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 255, 100, 100);
 
 					prev = v;
@@ -385,7 +385,7 @@ update_status ModulePhysics::PostUpdate()
 					for (int32 i = 0; i < shape->m_count; ++i)
 					{
 						v = b->GetWorldPoint(shape->m_vertices[i]);
-						if (i > 0)
+						if (i > 0 && debug)
 							App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
 						prev = v;
 					}
@@ -405,6 +405,7 @@ update_status ModulePhysics::PostUpdate()
 
 				v1 = b->GetWorldPoint(shape->m_vertex0);
 				v1 = b->GetWorldPoint(shape->m_vertex1);
+				if (debug)
 				App->renderer->DrawLine(METERS_TO_PIXELS(v1.x), METERS_TO_PIXELS(v1.y), METERS_TO_PIXELS(v2.x), METERS_TO_PIXELS(v2.y), 100, 100, 255);
 			}
 			break;
