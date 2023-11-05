@@ -167,7 +167,8 @@ bool ModulePhysics::Start()
 	App->scene_intro->circles.add(App->physics->CreateCircle(170, 500, 20, 1.5f, false));
 	App->scene_intro->circles.add(App->physics->CreateCircle(780, 450, 20, 1.5f, false));
 	App->scene_intro->circles.add(App->physics->CreateCircle(400, 450, 20, 1.5f, false));
-	App->scene_intro->circles.add(App->physics->CreateCircle(463, 580, 20, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(439, 610, 20, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(493, 610, 20, 1.5f, false));
 
 
 	return true;
@@ -206,7 +207,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, float restitutio
 	shape.m_radius = PIXEL_TO_METERS(radius);
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.density = 5.0f;
+	fixture.density = 3.0f;
 	fixture.restitution = restitution;
 
 
