@@ -161,14 +161,21 @@ bool ModulePhysics::Start()
 
 	App->scene_intro->circlexup.add(daBall);
 	//bumper circulo
-	
 
-	App->scene_intro->circles.add(App->physics->CreateCircle(420, 250, 20, 1.5f, false));
-	App->scene_intro->circles.add(App->physics->CreateCircle(170, 500, 20, 1.5f, false));
-	App->scene_intro->circles.add(App->physics->CreateCircle(780, 450, 20, 1.5f, false));
-	App->scene_intro->circles.add(App->physics->CreateCircle(400, 450, 20, 1.5f, false));
-	App->scene_intro->circles.add(App->physics->CreateCircle(439, 610, 20, 1.5f, false));
-	App->scene_intro->circles.add(App->physics->CreateCircle(493, 610, 20, 1.5f, false));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(1018, 180, 10, 90, 3.5f, true));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(1018, 250, 10, 90, 3.5f, true));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(520, 250, 10, 90, 1.5f, true));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(520, 280, 10, 90, 1.5f, true));
+	App->scene_intro->boxesV.add(App->physics->CreateRectangle(25, 505, 10, 90, 3.0f, true));
+	App->scene_intro->circles.add(App->physics->CreateCircle(930, 320, 15, 1.5f, false));
+
+	App->scene_intro->circles.add(App->physics->CreateCircle(80, 100, 15, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(820, 500, 15, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(1015, 120, 15, 2.5f, false));
+	
+	App->scene_intro->circles.add(App->physics->CreateCircle(190, 640, 15, 3.0f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(439, 620, 15, 1.5f, false));
+	App->scene_intro->circles.add(App->physics->CreateCircle(493, 620, 15, 1.5f, false));
 
 
 	return true;
